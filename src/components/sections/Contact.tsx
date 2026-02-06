@@ -29,8 +29,8 @@ const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "info@risstechnologies.com",
-    href: "mailto:info@risstechnologies.com",
+    value: "connect@risstechnologies.com",
+    href: "mailto:connect@risstechnologies.com",
   },
   {
     icon: Phone,
