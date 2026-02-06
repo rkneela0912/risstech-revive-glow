@@ -22,7 +22,7 @@ const contactInfo = [
   {
     icon: Mail,
     label: "Email",
-    value: "connect@risstechnologies.com",
+    value: "connect@risstechnologiesllc.com",
     href: "mailto:connect@risstechnologiesllc.com",
   },
   {
