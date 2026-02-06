@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const navLinks = [
   { name: "Home", href: "#home" },
@@ -69,7 +70,9 @@ const Navigation = () => {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.8 }}
+              className="flex items-center gap-2"
             >
+              <ThemeToggle />
               <Button
                 asChild
                 className="glow-button bg-primary hover:bg-primary/90"
@@ -118,14 +121,17 @@ const Navigation = () => {
                   {link.name}
                 </motion.a>
               ))}
-              <Button
-                asChild
-                className="w-full glow-button bg-primary hover:bg-primary/90"
-              >
-                <a href="#contact" onClick={() => setIsMobileMenuOpen(false)}>
-                  Get Started
-                </a>
-              </Button>
+              <div className="flex items-center gap-3">
+                <ThemeToggle />
+                <Button
+                  asChild
+                  className="flex-1 glow-button bg-primary hover:bg-primary/90"
+                >
+                  <a href="#contact" onClick={() => setIsMobileMenuOpen(false)}>
+                    Get Started
+                  </a>
+                </Button>
+              </div>
             </div>
           </motion.div>
         )}
