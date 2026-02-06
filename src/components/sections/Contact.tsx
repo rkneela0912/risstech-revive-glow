@@ -7,14 +7,7 @@ import { Send, Mail, MapPin, Phone, CheckCircle, MessageSquare } from "lucide-re
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
 
 const contactSchema = z.object({
@@ -30,7 +23,7 @@ const contactInfo = [
     icon: Mail,
     label: "Email",
     value: "connect@risstechnologies.com",
-    href: "mailto:connect@risstechnologies.com",
+    href: "mailto:connect@risstechnologiesllc.com",
   },
   {
     icon: Phone,
@@ -64,16 +57,16 @@ const Contact = () => {
 
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
-    
+
     // TODO: Implement actual email sending via Edge Function
     // For now, simulate a submission
     await new Promise((resolve) => setTimeout(resolve, 1500));
-    
+
     console.log("Form submitted:", data);
-    
+
     setIsSubmitting(false);
     setIsSubmitted(true);
-    
+
     toast({
       title: "Message sent!",
       description: "We'll get back to you as soon as possible.",
@@ -101,9 +94,7 @@ const Contact = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-primary font-semibold text-sm uppercase tracking-wider">
-            Get In Touch
-          </span>
+          <span className="text-primary font-semibold text-sm uppercase tracking-wider">Get In Touch</span>
           <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6">
             Let's <span className="gradient-text">Connect</span>
           </h2>
@@ -123,8 +114,8 @@ const Contact = () => {
             <div>
               <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
               <p className="text-muted-foreground mb-8">
-                Have a project in mind? We'd love to hear from you. Fill out the form 
-                or use our contact information below.
+                Have a project in mind? We'd love to hear from you. Fill out the form or use our contact information
+                below.
               </p>
             </div>
 
@@ -159,9 +150,9 @@ const Contact = () => {
             >
               <div className="flex items-center gap-4">
                 <motion.div
-                  animate={{ 
+                  animate={{
                     scale: [1, 1.1, 1],
-                    rotate: [0, 5, 0, -5, 0]
+                    rotate: [0, 5, 0, -5, 0],
                   }}
                   transition={{ duration: 4, repeat: Infinity }}
                   className="w-16 h-16 rounded-xl bg-primary/20 flex items-center justify-center"
@@ -185,7 +176,7 @@ const Contact = () => {
             <div className="p-8 rounded-2xl bg-card border border-border/50 shadow-xl relative overflow-hidden group">
               {/* Glow effect */}
               <div className="absolute -inset-px rounded-2xl bg-gradient-to-r from-primary/10 via-purple-glow/10 to-gold/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
-              
+
               <div className="relative">
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
