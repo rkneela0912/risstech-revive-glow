@@ -41,7 +41,7 @@ const contactInfo = [
   {
     icon: MapPin,
     label: "Location",
-    value: "New York, NY",
+    value: "Clarksburg, MD",
     href: "#",
   },
 ];
