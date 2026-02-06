@@ -57,6 +57,23 @@ const Approach = () => {
           </p>
         </motion.div>
 
+        {/* Connecting animated line for desktop */}
+        <div className="hidden md:block absolute top-[55%] left-[15%] right-[15%] h-0.5 overflow-hidden">
+          <motion.div
+            className="h-full bg-gradient-to-r from-transparent via-primary to-transparent"
+            initial={{ scaleX: 0, opacity: 0 }}
+            animate={isInView ? { scaleX: 1, opacity: 0.3 } : {}}
+            transition={{ duration: 1.5, delay: 0.5 }}
+          />
+          {/* Animated dot traveling along the line */}
+          <motion.div
+            className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-primary shadow-lg shadow-primary/50"
+            initial={{ left: "0%", opacity: 0 }}
+            animate={isInView ? { left: ["0%", "100%"], opacity: [0, 1, 1, 0] } : {}}
+            transition={{ duration: 3, delay: 1, repeat: Infinity, repeatDelay: 2 }}
+          />
+        </div>
+
         <div className="grid md:grid-cols-3 gap-8">
           {approaches.map((approach, index) => (
             <motion.div
@@ -65,16 +82,19 @@ const Approach = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: index * 0.2, duration: 0.6 }}
             >
-              <Card className="group relative h-full overflow-hidden border-border/50 bg-card/50 backdrop-blur-sm hover:border-primary/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2">
+              <Card className="group relative h-full overflow-hidden border-border/50 bg-card/80 backdrop-blur-sm hover:border-primary/50 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2">
                 {/* Step number */}
                 <div className="absolute top-4 right-4 text-6xl font-bold text-primary/10 group-hover:text-primary/20 transition-colors">
                   {approach.step}
                 </div>
 
+                {/* Glow effect on hover */}
+                <div className="absolute -inset-px rounded-lg bg-gradient-to-r from-primary/20 via-purple-glow/20 to-gold/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
+
                 {/* Gradient overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-purple-glow/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                <CardContent className="relative p-8 pt-12">
+                <CardContent className="relative p-8 pt-12 bg-card/90 rounded-lg">
                   {/* Icon */}
                   <motion.div
                     className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-6 group-hover:bg-primary group-hover:scale-110 transition-all duration-500"
@@ -98,9 +118,6 @@ const Approach = () => {
             </motion.div>
           ))}
         </div>
-
-        {/* Connecting line for desktop */}
-        <div className="hidden md:block absolute top-1/2 left-1/4 right-1/4 h-0.5 bg-gradient-to-r from-transparent via-border to-transparent -z-10" />
       </div>
     </section>
   );

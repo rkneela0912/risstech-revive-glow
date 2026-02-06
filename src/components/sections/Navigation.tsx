@@ -33,7 +33,7 @@ const Navigation = () => {
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
           ? "bg-background/95 backdrop-blur-lg shadow-lg border-b border-border/50"
-          : "bg-transparent"
+          : "bg-black/20 backdrop-blur-md"
       }`}
     >
       <div className="container mx-auto px-6 py-4">
@@ -48,7 +48,11 @@ const Navigation = () => {
             <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
               <span className="text-primary-foreground font-bold text-xl">R</span>
             </div>
-            <span className="text-xl font-bold gradient-text">RISS Technologies</span>
+            <span className={`text-xl font-bold transition-colors duration-300 ${
+              isScrolled ? "gradient-text" : "text-white"
+            }`}>
+              RISS Technologies
+            </span>
           </motion.a>
 
           {/* Desktop Navigation */}
@@ -57,7 +61,11 @@ const Navigation = () => {
               <motion.a
                 key={link.name}
                 href={link.href}
-                className="nav-link text-foreground/80 hover:text-foreground transition-colors font-medium"
+                className={`nav-link font-medium transition-colors duration-300 ${
+                  isScrolled 
+                    ? "text-foreground/80 hover:text-foreground" 
+                    : "text-white/90 hover:text-white"
+                }`}
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 + 0.3 }}
@@ -72,10 +80,10 @@ const Navigation = () => {
               transition={{ delay: 0.8 }}
               className="flex items-center gap-2"
             >
-              <ThemeToggle />
+              <ThemeToggle isScrolled={isScrolled} />
               <Button
                 asChild
-                className="glow-button bg-primary hover:bg-primary/90"
+                className="glow-button bg-primary hover:bg-primary/90 text-primary-foreground"
               >
                 <a href="#contact">Get Started</a>
               </Button>
@@ -84,7 +92,11 @@ const Navigation = () => {
 
           {/* Mobile Menu Button */}
           <motion.button
-            className="md:hidden p-2 rounded-lg hover:bg-secondary transition-colors"
+            className={`md:hidden p-2 rounded-lg transition-colors ${
+              isScrolled 
+                ? "hover:bg-secondary text-foreground" 
+                : "hover:bg-white/10 text-white"
+            }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             whileTap={{ scale: 0.9 }}
           >

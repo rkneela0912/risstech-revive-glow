@@ -58,48 +58,48 @@
   }
 
   .dark {
-    --background: 270 50% 5%;
+    --background: 270 40% 4%;
     --foreground: 270 10% 95%;
 
-    --card: 270 40% 8%;
+    --card: 270 35% 7%;
     --card-foreground: 270 10% 95%;
 
-    --popover: 270 40% 8%;
+    --popover: 270 35% 7%;
     --popover-foreground: 270 10% 95%;
 
-    --primary: 270 60% 60%;
+    --primary: 270 60% 65%;
     --primary-foreground: 270 50% 5%;
 
-    --secondary: 270 30% 15%;
+    --secondary: 270 25% 12%;
     --secondary-foreground: 270 10% 90%;
 
-    --muted: 270 30% 15%;
-    --muted-foreground: 270 15% 60%;
+    --muted: 270 25% 12%;
+    --muted-foreground: 270 15% 65%;
 
-    --accent: 45 70% 50%;
+    --accent: 45 80% 55%;
     --accent-foreground: 270 50% 5%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 270 30% 20%;
-    --input: 270 30% 20%;
-    --ring: 270 60% 60%;
+    --border: 270 25% 18%;
+    --input: 270 25% 18%;
+    --ring: 270 60% 65%;
 
-    --purple-glow: 270 80% 65%;
-    --purple-deep: 270 60% 15%;
-    --purple-light: 270 50% 50%;
-    --gold-accent: 45 70% 55%;
-    --platinum: 240 10% 70%;
+    --purple-glow: 270 80% 70%;
+    --purple-deep: 270 50% 10%;
+    --purple-light: 270 50% 55%;
+    --gold-accent: 45 80% 60%;
+    --platinum: 240 10% 75%;
 
-    --sidebar-background: 270 50% 8%;
+    --sidebar-background: 270 40% 6%;
     --sidebar-foreground: 270 10% 90%;
-    --sidebar-primary: 270 60% 60%;
+    --sidebar-primary: 270 60% 65%;
     --sidebar-primary-foreground: 270 50% 5%;
-    --sidebar-accent: 270 30% 15%;
+    --sidebar-accent: 270 25% 12%;
     --sidebar-accent-foreground: 270 10% 90%;
-    --sidebar-border: 270 30% 20%;
-    --sidebar-ring: 270 60% 60%;
+    --sidebar-border: 270 25% 18%;
+    --sidebar-ring: 270 60% 65%;
   }
 }
 
@@ -193,12 +193,22 @@
     @apply origin-left scale-x-100;
   }
 
-  /* Premium section background */
+  /* Premium section background - improved for dark mode */
   .section-dark {
     background: linear-gradient(
       180deg,
-      hsl(var(--purple-deep)) 0%,
-      hsl(270 60% 15%) 100%
+      hsl(270 50% 8%) 0%,
+      hsl(270 45% 12%) 50%,
+      hsl(270 40% 8%) 100%
+    );
+  }
+
+  .dark .section-dark {
+    background: linear-gradient(
+      180deg,
+      hsl(270 40% 5%) 0%,
+      hsl(270 35% 8%) 50%,
+      hsl(270 30% 5%) 100%
     );
   }
 

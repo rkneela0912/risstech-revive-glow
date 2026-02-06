@@ -3,7 +3,7 @@ import { motion, useInView } from "framer-motion";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Send, Mail, MapPin, Phone, CheckCircle } from "lucide-react";
+import { Send, Mail, MapPin, Phone, CheckCircle, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -133,13 +133,13 @@ const Contact = () => {
                 <motion.a
                   key={item.label}
                   href={item.href}
-                  className="flex items-center gap-4 p-4 rounded-xl bg-secondary/50 hover:bg-secondary transition-colors group"
+                  className="flex items-center gap-4 p-4 rounded-xl bg-secondary/50 hover:bg-secondary transition-colors group border border-transparent hover:border-primary/20"
                   initial={{ opacity: 0, x: -20 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ delay: 0.4 + index * 0.1 }}
                   whileHover={{ x: 5 }}
                 >
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all">
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all group-hover:scale-110">
                     <item.icon className="w-5 h-5 text-primary group-hover:text-primary-foreground" />
                   </div>
                   <div>
@@ -149,6 +149,31 @@ const Contact = () => {
                 </motion.a>
               ))}
             </div>
+
+            {/* Decorative illustration */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ delay: 0.8, duration: 0.6 }}
+              className="relative p-8 rounded-2xl bg-gradient-to-br from-primary/10 to-purple-glow/10 border border-primary/20 mt-8"
+            >
+              <div className="flex items-center gap-4">
+                <motion.div
+                  animate={{ 
+                    scale: [1, 1.1, 1],
+                    rotate: [0, 5, 0, -5, 0]
+                  }}
+                  transition={{ duration: 4, repeat: Infinity }}
+                  className="w-16 h-16 rounded-xl bg-primary/20 flex items-center justify-center"
+                >
+                  <MessageSquare className="w-8 h-8 text-primary" />
+                </motion.div>
+                <div>
+                  <h4 className="font-bold text-lg">Quick Response</h4>
+                  <p className="text-muted-foreground text-sm">We typically respond within 24 hours</p>
+                </div>
+              </div>
+            </motion.div>
           </motion.div>
 
           {/* Contact Form */}
@@ -157,93 +182,98 @@ const Contact = () => {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <div className="p-8 rounded-2xl bg-card border border-border/50 shadow-xl">
-              <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                  <FormField
-                    control={form.control}
-                    name="name"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Name</FormLabel>
-                        <FormControl>
-                          <Input
-                            placeholder="Your name"
-                            className="bg-secondary/50 border-border focus:border-primary transition-colors"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+            <div className="p-8 rounded-2xl bg-card border border-border/50 shadow-xl relative overflow-hidden group">
+              {/* Glow effect */}
+              <div className="absolute -inset-px rounded-2xl bg-gradient-to-r from-primary/10 via-purple-glow/10 to-gold/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
+              
+              <div className="relative">
+                <Form {...form}>
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                    <FormField
+                      control={form.control}
+                      name="name"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Name</FormLabel>
+                          <FormControl>
+                            <Input
+                              placeholder="Your name"
+                              className="bg-secondary/50 border-border focus:border-primary transition-colors"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
 
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Email</FormLabel>
-                        <FormControl>
-                          <Input
-                            type="email"
-                            placeholder="your@email.com"
-                            className="bg-secondary/50 border-border focus:border-primary transition-colors"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Email</FormLabel>
+                          <FormControl>
+                            <Input
+                              type="email"
+                              placeholder="your@email.com"
+                              className="bg-secondary/50 border-border focus:border-primary transition-colors"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
 
-                  <FormField
-                    control={form.control}
-                    name="message"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Message</FormLabel>
-                        <FormControl>
-                          <Textarea
-                            placeholder="Tell us about your project..."
-                            className="bg-secondary/50 border-border focus:border-primary transition-colors min-h-[150px] resize-none"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                    <FormField
+                      control={form.control}
+                      name="message"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Message</FormLabel>
+                          <FormControl>
+                            <Textarea
+                              placeholder="Tell us about your project..."
+                              className="bg-secondary/50 border-border focus:border-primary transition-colors min-h-[150px] resize-none"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
 
-                  <Button
-                    type="submit"
-                    size="lg"
-                    className="w-full glow-button bg-primary hover:bg-primary/90"
-                    disabled={isSubmitting || isSubmitted}
-                  >
-                    {isSubmitted ? (
-                      <>
-                        <CheckCircle className="w-5 h-5 mr-2" />
-                        Message Sent!
-                      </>
-                    ) : isSubmitting ? (
-                      <>
-                        <motion.div
-                          className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full mr-2"
-                          animate={{ rotate: 360 }}
-                          transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                        />
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="w-5 h-5 mr-2" />
-                        Send Message
-                      </>
-                    )}
-                  </Button>
-                </form>
-              </Form>
+                    <Button
+                      type="submit"
+                      size="lg"
+                      className="w-full glow-button bg-primary hover:bg-primary/90"
+                      disabled={isSubmitting || isSubmitted}
+                    >
+                      {isSubmitted ? (
+                        <>
+                          <CheckCircle className="w-5 h-5 mr-2" />
+                          Message Sent!
+                        </>
+                      ) : isSubmitting ? (
+                        <>
+                          <motion.div
+                            className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full mr-2"
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+                          />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-5 h-5 mr-2" />
+                          Send Message
+                        </>
+                      )}
+                    </Button>
+                  </form>
+                </Form>
+              </div>
             </div>
           </motion.div>
         </div>
