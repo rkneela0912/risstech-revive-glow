@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Linkedin, Twitter, Facebook, Instagram, Mail } from "lucide-react";
+import rissLogo from "@/assets/riss-logo.png";
 
 const socialLinks = [
   { icon: Linkedin, href: "#", label: "LinkedIn" },
@@ -36,15 +37,14 @@ const Footer = () => {
             {/* Brand */}
             <div className="lg:col-span-2">
               <motion.div
-                className="flex items-center space-x-2 mb-6"
+                className="flex items-center mb-6"
                 whileHover={{ scale: 1.02 }}
               >
-                <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-                  <span className="text-primary-foreground font-bold text-xl">R</span>
-                </div>
-                <span className="text-xl font-bold text-primary-foreground">
-                  RISS Technologies
-                </span>
+                <img 
+                  src={rissLogo} 
+                  alt="RISS Technologies" 
+                  className="h-14 w-auto"
+                />
               </motion.div>
               
               <p className="text-primary-foreground/70 max-w-md mb-8 leading-relaxed">

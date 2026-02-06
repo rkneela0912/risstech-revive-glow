@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "@/components/ThemeToggle";
+import rissLogo from "@/assets/riss-logo.png";
 
 const navLinks = [
   { name: "Home", href: "#home" },
@@ -41,18 +42,15 @@ const Navigation = () => {
           {/* Logo */}
           <motion.a
             href="#home"
-            className="flex items-center space-x-2"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            className="flex items-center space-x-3"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
           >
-            <div className="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-xl">R</span>
-            </div>
-            <span className={`text-xl font-bold transition-colors duration-300 ${
-              isScrolled ? "gradient-text" : "text-white"
-            }`}>
-              RISS Technologies
-            </span>
+            <img 
+              src={rissLogo} 
+              alt="RISS Technologies" 
+              className="h-12 w-auto"
+            />
           </motion.a>
 
           {/* Desktop Navigation */}
