@@ -33,7 +33,7 @@ const Footer = () => {
             {/* Brand */}
             <div className="lg:col-span-2">
               <motion.div className="flex items-center mb-6" whileHover={{ scale: 1.02 }}>
-                <img src={rissLogo} alt="RISS Technologies" className="h-14 w-auto" />
+                <img src={rissLogo} alt="RISS Technologies" className="h-14 w-auto rounded-full" />
               </motion.div>
 
               <p className="text-muted-foreground max-w-md mb-8 leading-relaxed">
