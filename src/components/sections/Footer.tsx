@@ -1,12 +1,10 @@
 import { motion } from "framer-motion";
-import { Linkedin, Twitter, Facebook, Instagram, Mail } from "lucide-react";
+import { Linkedin, Twitter, Mail } from "lucide-react";
 import rissLogo from "@/assets/riss-logo.png";
 
 const socialLinks = [
   { icon: Linkedin, href: "#", label: "LinkedIn" },
   { icon: Twitter, href: "#", label: "Twitter" },
-  { icon: Facebook, href: "#", label: "Facebook" },
-  { icon: Instagram, href: "#", label: "Instagram" },
   { icon: Mail, href: "mailto:connect@risstechnologiesllc.com", label: "Email" },
 ];
 
@@ -14,51 +12,41 @@ const footerLinks = {
   company: [
     { name: "About Us", href: "#about" },
     { name: "Our Approach", href: "#approach" },
-    { name: "Careers", href: "#" },
     { name: "Contact", href: "#contact" },
   ],
   services: [
-    { name: "Cloud Solutions", href: "#" },
-    { name: "Cybersecurity", href: "#" },
-    { name: "Software Development", href: "#" },
-    { name: "IT Consulting", href: "#" },
+    { name: "Cloud Solutions", href: "#services" },
+    { name: "Cybersecurity", href: "#services" },
+    { name: "Software Development", href: "#services" },
+    { name: "IT Consulting", href: "#services" },
   ],
 };
 
 const Footer = () => {
   return (
     <footer className="relative overflow-hidden">
-      {/* Gradient separator */}
-      <div className="h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+      <div className="h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent" />
 
       <div className="section-dark py-16">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
             {/* Brand */}
             <div className="lg:col-span-2">
-              <motion.div
-                className="flex items-center mb-6"
-                whileHover={{ scale: 1.02 }}
-              >
-                <img 
-                  src={rissLogo} 
-                  alt="RISS Technologies" 
-                  className="h-14 w-auto"
-                />
+              <motion.div className="flex items-center mb-6" whileHover={{ scale: 1.02 }}>
+                <img src={rissLogo} alt="RISS Technologies" className="h-14 w-auto" />
               </motion.div>
-              
-              <p className="text-primary-foreground/70 max-w-md mb-8 leading-relaxed">
-                Empowering businesses through innovative technology solutions. 
-                We're your trusted partner for digital transformation and IT excellence.
+
+              <p className="text-muted-foreground max-w-md mb-8 leading-relaxed">
+                Engineering the future of enterprise technology through cloud-native architecture,
+                zero-trust security, and intelligent automation.
               </p>
 
-              {/* Social Links */}
-              <div className="flex gap-4">
+              <div className="flex gap-3">
                 {socialLinks.map((social, index) => (
                   <motion.a
                     key={social.label}
                     href={social.href}
-                    className="w-10 h-10 rounded-lg bg-primary-foreground/10 flex items-center justify-center text-primary-foreground/70 hover:bg-primary hover:text-primary-foreground transition-all"
+                    className="w-10 h-10 rounded-lg bg-secondary/50 flex items-center justify-center text-muted-foreground hover:text-primary hover:bg-primary/10 transition-all neon-border"
                     whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                     initial={{ opacity: 0, y: 20 }}
@@ -74,14 +62,11 @@ const Footer = () => {
 
             {/* Company Links */}
             <div>
-              <h3 className="text-primary-foreground font-semibold mb-6">Company</h3>
+              <h3 className="font-display font-bold text-foreground mb-6 text-sm uppercase tracking-wider">Company</h3>
               <ul className="space-y-3">
                 {footerLinks.company.map((link) => (
                   <li key={link.name}>
-                    <a
-                      href={link.href}
-                      className="text-primary-foreground/70 hover:text-primary transition-colors inline-block"
-                    >
+                    <a href={link.href} className="text-muted-foreground hover:text-primary transition-colors text-sm">
                       {link.name}
                     </a>
                   </li>
@@ -91,14 +76,11 @@ const Footer = () => {
 
             {/* Services Links */}
             <div>
-              <h3 className="text-primary-foreground font-semibold mb-6">Services</h3>
+              <h3 className="font-display font-bold text-foreground mb-6 text-sm uppercase tracking-wider">Services</h3>
               <ul className="space-y-3">
                 {footerLinks.services.map((link) => (
                   <li key={link.name}>
-                    <a
-                      href={link.href}
-                      className="text-primary-foreground/70 hover:text-primary transition-colors inline-block"
-                    >
+                    <a href={link.href} className="text-muted-foreground hover:text-primary transition-colors text-sm">
                       {link.name}
                     </a>
                   </li>
@@ -107,19 +89,15 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Bottom bar */}
-          <div className="pt-8 border-t border-primary-foreground/10">
+          {/* Bottom */}
+          <div className="pt-8 border-t border-border/30">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-              <p className="text-primary-foreground/50 text-sm">
-                © {new Date().getFullYear()} RISS Technologies. All rights reserved.
+              <p className="text-muted-foreground text-xs font-mono">
+                © {new Date().getFullYear()} RISS Technologies LLC. All rights reserved.
               </p>
-              <div className="flex gap-6 text-sm">
-                <a href="#" className="text-primary-foreground/50 hover:text-primary-foreground transition-colors">
-                  Privacy Policy
-                </a>
-                <a href="#" className="text-primary-foreground/50 hover:text-primary-foreground transition-colors">
-                  Terms of Service
-                </a>
+              <div className="flex gap-6 text-xs font-mono">
+                <a href="#" className="text-muted-foreground hover:text-primary transition-colors">Privacy Policy</a>
+                <a href="#" className="text-muted-foreground hover:text-primary transition-colors">Terms of Service</a>
               </div>
             </div>
           </div>

@@ -57,17 +57,14 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
-        // Custom premium colors
-        purple: {
-          glow: "hsl(var(--purple-glow))",
-          deep: "hsl(var(--purple-deep))",
-          light: "hsl(var(--purple-light))",
+        // Custom neon colors
+        neon: {
+          cyan: "hsl(var(--neon-cyan))",
+          blue: "hsl(var(--neon-blue))",
+          purple: "hsl(var(--neon-purple))",
+          green: "hsl(var(--neon-green))",
         },
-        gold: {
-          DEFAULT: "hsl(var(--gold-accent))",
-          accent: "hsl(var(--gold-accent))",
-        },
-        platinum: "hsl(var(--platinum))",
+        "surface-glass": "hsl(var(--surface-glass))",
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -76,7 +73,8 @@ export default {
       },
       fontFamily: {
         sans: ["Inter", "system-ui", "sans-serif"],
-        display: ["Outfit", "Inter", "system-ui", "sans-serif"],
+        display: ["Orbitron", "Inter", "system-ui", "sans-serif"],
+        mono: ["JetBrains Mono", "monospace"],
       },
       keyframes: {
         "accordion-down": {
@@ -191,8 +189,8 @@ export default {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-        "hero-gradient": "linear-gradient(135deg, hsl(270 60% 15%) 0%, hsl(270 50% 25%) 50%, hsl(270 40% 35%) 100%)",
-        "purple-gradient": "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--purple-glow)) 100%)",
+        "hero-gradient": "linear-gradient(135deg, hsl(220 25% 3%) 0%, hsl(220 20% 8%) 50%, hsl(220 15% 12%) 100%)",
+        "neon-gradient": "linear-gradient(135deg, hsl(var(--primary)) 0%, hsl(var(--neon-blue)) 100%)",
       },
     },
   },
