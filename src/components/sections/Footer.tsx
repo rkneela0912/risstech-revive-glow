@@ -7,7 +7,7 @@ const socialLinks = [
   { icon: Twitter, href: "#", label: "Twitter" },
   { icon: Facebook, href: "#", label: "Facebook" },
   { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Mail, href: "mailto:info@risstechnologies.com", label: "Email" },
+  { icon: Mail, href: "mailto:connect@risstechnologiesllc.com", label: "Email" },
 ];
 
 const footerLinks = {

@@ -8,7 +8,7 @@ import rissLogo from "@/assets/riss-logo.png";
 const navLinks = [
   { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
-  { name: "Clients", href: "#clients" },
+  { name: "Services", href: "#services" },
   { name: "Approach", href: "#approach" },
   { name: "Contact", href: "#contact" },
 ];
