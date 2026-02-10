@@ -19,24 +19,9 @@ const contactSchema = z.object({
 type ContactFormData = z.infer<typeof contactSchema>;
 
 const contactInfo = [
-  {
-    icon: Mail,
-    label: "Email",
-    value: "connect@risstechnologiesllc.com",
-    href: "mailto:connect@risstechnologiesllc.com",
-  },
-  {
-    icon: Phone,
-    label: "Phone",
-    value: "+1 (443) 574-4254",
-    href: "tel:+14435744254",
-  },
-  {
-    icon: MapPin,
-    label: "Location",
-    value: "Clarksburg, MD",
-    href: "#",
-  },
+  { icon: Mail, label: "Email", value: "connect@risstechnologiesllc.com", href: "mailto:connect@risstechnologiesllc.com" },
+  { icon: Phone, label: "Phone", value: "+1 (443) 574-4254", href: "tel:+14435744254" },
+  { icon: MapPin, label: "Location", value: "Clarksburg, MD", href: "#" },
 ];
 
 const Contact = () => {
@@ -48,54 +33,33 @@ const Contact = () => {
 
   const form = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      message: "",
-    },
+    defaultValues: { name: "", email: "", message: "" },
   });
 
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
-
-    // TODO: Implement actual email sending via Edge Function
-    // For now, simulate a submission
     await new Promise((resolve) => setTimeout(resolve, 1500));
-
     console.log("Form submitted:", data);
-
     setIsSubmitting(false);
     setIsSubmitted(true);
-
-    toast({
-      title: "Message sent!",
-      description: "We'll get back to you as soon as possible.",
-    });
-
-    // Reset form after a delay
-    setTimeout(() => {
-      form.reset();
-      setIsSubmitted(false);
-    }, 3000);
+    toast({ title: "Message sent!", description: "We'll get back to you as soon as possible." });
+    setTimeout(() => { form.reset(); setIsSubmitted(false); }, 3000);
   };
 
   return (
-    <section id="contact" ref={ref} className="py-24 bg-background relative overflow-hidden">
-      {/* Background decoration */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-        <div className="absolute -top-1/2 -right-1/4 w-[800px] h-[800px] bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute -bottom-1/2 -left-1/4 w-[600px] h-[600px] bg-purple-glow/5 rounded-full blur-3xl" />
-      </div>
+    <section id="contact" ref={ref} className="py-28 bg-background relative overflow-hidden">
+      <div className="absolute -top-1/2 -right-1/4 w-[800px] h-[800px] bg-primary/3 rounded-full blur-[150px]" />
+      <div className="absolute -bottom-1/2 -left-1/4 w-[600px] h-[600px] bg-neon-blue/3 rounded-full blur-[150px]" />
 
       <div className="container mx-auto px-6 relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <span className="text-primary font-semibold text-sm uppercase tracking-wider">Get In Touch</span>
-          <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6">
+          <span className="text-primary font-mono text-sm uppercase tracking-[0.3em]">// Get In Touch</span>
+          <h2 className="font-display text-4xl md:text-5xl font-bold mt-4 mb-6 tracking-tight">
             Let's <span className="gradient-text">Connect</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
@@ -106,61 +70,56 @@ const Contact = () => {
         <div className="grid lg:grid-cols-2 gap-16">
           {/* Contact Info */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -40 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-8"
           >
             <div>
-              <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
-              <p className="text-muted-foreground mb-8">
-                Have a project in mind? We'd love to hear from you. Fill out the form or use our contact information
-                below.
+              <h3 className="text-2xl font-display font-bold mb-4">Contact Information</h3>
+              <p className="text-muted-foreground">
+                Have a project in mind? We'd love to hear from you.
               </p>
             </div>
 
-            <div className="space-y-6">
+            <div className="space-y-4">
               {contactInfo.map((item, index) => (
                 <motion.a
                   key={item.label}
                   href={item.href}
-                  className="flex items-center gap-4 p-4 rounded-xl bg-secondary/50 hover:bg-secondary transition-colors group border border-transparent hover:border-primary/20"
+                  className="flex items-center gap-4 p-4 rounded-xl glass-card group transition-all duration-300"
                   initial={{ opacity: 0, x: -20 }}
                   animate={isInView ? { opacity: 1, x: 0 } : {}}
                   transition={{ delay: 0.4 + index * 0.1 }}
                   whileHover={{ x: 5 }}
                 >
-                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary group-hover:text-primary-foreground transition-all group-hover:scale-110">
-                    <item.icon className="w-5 h-5 text-primary group-hover:text-primary-foreground" />
+                  <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 group-hover:shadow-[0_0_15px_hsl(180_80%_50%/0.2)] transition-all">
+                    <item.icon className="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <p className="text-sm text-muted-foreground">{item.label}</p>
-                    <p className="font-medium">{item.value}</p>
+                    <p className="text-xs text-muted-foreground font-mono uppercase tracking-wider">{item.label}</p>
+                    <p className="font-medium text-foreground">{item.value}</p>
                   </div>
                 </motion.a>
               ))}
             </div>
 
-            {/* Decorative illustration */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ delay: 0.8, duration: 0.6 }}
-              className="relative p-8 rounded-2xl bg-gradient-to-br from-primary/10 to-purple-glow/10 border border-primary/20 mt-8"
+              transition={{ delay: 0.8 }}
+              className="p-6 rounded-xl neon-border bg-secondary/30"
             >
               <div className="flex items-center gap-4">
                 <motion.div
-                  animate={{
-                    scale: [1, 1.1, 1],
-                    rotate: [0, 5, 0, -5, 0],
-                  }}
-                  transition={{ duration: 4, repeat: Infinity }}
-                  className="w-16 h-16 rounded-xl bg-primary/20 flex items-center justify-center"
+                  animate={{ scale: [1, 1.1, 1] }}
+                  transition={{ duration: 3, repeat: Infinity }}
+                  className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center"
                 >
-                  <MessageSquare className="w-8 h-8 text-primary" />
+                  <MessageSquare className="w-7 h-7 text-primary" />
                 </motion.div>
                 <div>
-                  <h4 className="font-bold text-lg">Quick Response</h4>
+                  <h4 className="font-display font-bold">Quick Response</h4>
                   <p className="text-muted-foreground text-sm">We typically respond within 24 hours</p>
                 </div>
               </div>
@@ -169,102 +128,70 @@ const Contact = () => {
 
           {/* Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 40 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <div className="p-8 rounded-2xl bg-card border border-border/50 shadow-xl relative overflow-hidden group">
-              {/* Glow effect */}
-              <div className="absolute -inset-px rounded-2xl bg-gradient-to-r from-primary/10 via-purple-glow/10 to-gold/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-sm" />
+            <div className="p-8 rounded-xl glass-card relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" />
 
-              <div className="relative">
-                <Form {...form}>
-                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                    <FormField
-                      control={form.control}
-                      name="name"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Name</FormLabel>
-                          <FormControl>
-                            <Input
-                              placeholder="Your name"
-                              className="bg-secondary/50 border-border focus:border-primary transition-colors"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Email</FormLabel>
-                          <FormControl>
-                            <Input
-                              type="email"
-                              placeholder="your@email.com"
-                              className="bg-secondary/50 border-border focus:border-primary transition-colors"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <FormField
-                      control={form.control}
-                      name="message"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Message</FormLabel>
-                          <FormControl>
-                            <Textarea
-                              placeholder="Tell us about your project..."
-                              className="bg-secondary/50 border-border focus:border-primary transition-colors min-h-[150px] resize-none"
-                              {...field}
-                            />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-
-                    <Button
-                      type="submit"
-                      size="lg"
-                      className="w-full glow-button bg-primary hover:bg-primary/90"
-                      disabled={isSubmitting || isSubmitted}
-                    >
-                      {isSubmitted ? (
-                        <>
-                          <CheckCircle className="w-5 h-5 mr-2" />
-                          Message Sent!
-                        </>
-                      ) : isSubmitting ? (
-                        <>
-                          <motion.div
-                            className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full mr-2"
-                            animate={{ rotate: 360 }}
-                            transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                          />
-                          Sending...
-                        </>
-                      ) : (
-                        <>
-                          <Send className="w-5 h-5 mr-2" />
-                          Send Message
-                        </>
-                      )}
-                    </Button>
-                  </form>
-                </Form>
-              </div>
+              <Form {...form}>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="font-mono text-xs uppercase tracking-wider">Name</FormLabel>
+                        <FormControl>
+                          <Input placeholder="Your name" className="bg-secondary/50 border-border focus:border-primary transition-colors" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="font-mono text-xs uppercase tracking-wider">Email</FormLabel>
+                        <FormControl>
+                          <Input type="email" placeholder="your@email.com" className="bg-secondary/50 border-border focus:border-primary transition-colors" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="message"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="font-mono text-xs uppercase tracking-wider">Message</FormLabel>
+                        <FormControl>
+                          <Textarea placeholder="Tell us about your project..." className="bg-secondary/50 border-border focus:border-primary transition-colors min-h-[150px] resize-none" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <Button
+                    type="submit"
+                    size="lg"
+                    className="w-full glow-button bg-primary hover:bg-primary/90 text-primary-foreground font-display font-bold tracking-wider"
+                    disabled={isSubmitting || isSubmitted}
+                  >
+                    {isSubmitted ? (
+                      <><CheckCircle className="w-5 h-5 mr-2" /> Message Sent!</>
+                    ) : isSubmitting ? (
+                      <><motion.div className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full mr-2" animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity, ease: "linear" }} /> Sending...</>
+                    ) : (
+                      <><Send className="w-5 h-5 mr-2" /> Send Message</>
+                    )}
+                  </Button>
+                </form>
+              </Form>
             </div>
           </motion.div>
         </div>

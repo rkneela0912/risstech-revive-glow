@@ -11,113 +11,45 @@ const stats = [
 
 const AnimatedCounter = ({ value, suffix, isInView }: { value: number; suffix: string; isInView: boolean }) => {
   const [count, setCount] = useState(0);
-
   useEffect(() => {
     if (!isInView) return;
-
     let start = 0;
     const end = value;
-    const duration = 2000;
-    const increment = end / (duration / 16);
-
+    const increment = end / 125;
     const timer = setInterval(() => {
       start += increment;
-      if (start >= end) {
-        setCount(end);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(start));
-      }
+      if (start >= end) { setCount(end); clearInterval(timer); }
+      else setCount(Math.floor(start));
     }, 16);
-
     return () => clearInterval(timer);
   }, [isInView, value]);
-
-  return (
-    <span>
-      {count.toLocaleString()}
-      {suffix}
-    </span>
-  );
+  return <span>{count.toLocaleString()}{suffix}</span>;
 };
-
-// Floating particle for background
-const FloatingParticle = ({ delay, size, left, duration }: {
-  delay: number;
-  size: number;
-  left: string;
-  duration: number;
-}) => (
-  <motion.div
-    className="absolute rounded-full bg-primary/30"
-    style={{
-      width: size,
-      height: size,
-      left,
-      bottom: "-10%",
-    }}
-    animate={{
-      y: [0, -800],
-      opacity: [0, 0.8, 0],
-      scale: [0.5, 1, 0.5],
-    }}
-    transition={{
-      duration,
-      delay,
-      repeat: Infinity,
-      ease: "easeOut",
-    }}
-  />
-);
 
 const Stats = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
-  // Generate particles
-  const particles = Array.from({ length: 20 }, (_, i) => ({
-    id: i,
-    delay: Math.random() * 5,
-    size: 4 + Math.random() * 8,
-    left: `${Math.random() * 100}%`,
-    duration: 6 + Math.random() * 4,
-  }));
-
   return (
-    <section ref={ref} className="py-24 relative overflow-hidden">
-      {/* Background */}
+    <section ref={ref} className="py-28 relative overflow-hidden">
       <div className="absolute inset-0 section-dark" />
-      
-      {/* Floating particles */}
-      {particles.map((particle) => (
-        <FloatingParticle key={particle.id} {...particle} />
-      ))}
-      
-      {/* Animated background elements */}
-      <motion.div
-        className="absolute inset-0 opacity-40"
+
+      {/* Grid overlay */}
+      <div
+        className="absolute inset-0 opacity-[0.03]"
         style={{
-          backgroundImage: `radial-gradient(circle at 20% 50%, hsl(270 60% 40% / 0.4) 0%, transparent 50%),
-                           radial-gradient(circle at 80% 50%, hsl(270 80% 50% / 0.3) 0%, transparent 50%)`,
-        }}
-        animate={{
-          backgroundPosition: ["0% 0%", "100% 100%"],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          repeatType: "reverse",
+          backgroundImage: `linear-gradient(hsl(180 100% 60% / 0.5) 1px, transparent 1px),
+                           linear-gradient(90deg, hsl(180 100% 60% / 0.5) 1px, transparent 1px)`,
+          backgroundSize: "80px 80px",
         }}
       />
 
-      {/* Grid overlay */}
-      <div 
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
-                           linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)`,
-          backgroundSize: "80px 80px",
-        }}
+      {/* Glow accents */}
+      <motion.div
+        className="absolute w-[600px] h-[600px] rounded-full blur-[150px] left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+        style={{ background: "hsl(180 80% 50% / 0.06)" }}
+        animate={{ scale: [1, 1.3, 1], opacity: [0.4, 0.8, 0.4] }}
+        transition={{ duration: 10, repeat: Infinity }}
       />
 
       <div className="container mx-auto px-6 relative z-10">
@@ -127,55 +59,39 @@ const Stats = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Our <span className="text-gold">Impact</span> in Numbers
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-foreground mb-4 tracking-tight">
+            Our <span className="gradient-text">Impact</span> in Numbers
           </h2>
-          <p className="text-white/70 text-lg max-w-2xl mx-auto">
-            Years of dedication and hard work reflected in the numbers that matter
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            Years of dedication reflected in the numbers that matter
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
           {stats.map((stat, index) => (
             <motion.div
               key={stat.label}
               initial={{ opacity: 0, y: 50 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: index * 0.15, duration: 0.6 }}
-              className="relative group"
+              transition={{ delay: index * 0.12, duration: 0.6 }}
+              className="group"
             >
-              <div className="text-center p-8 rounded-2xl bg-white/5 backdrop-blur-sm border border-white/10 hover:border-primary/50 transition-all duration-500 hover:bg-white/10 hover:shadow-xl hover:shadow-primary/20">
-                {/* Glow effect on hover */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/10 to-purple-glow/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl" />
-                
-                {/* Icon with pulse effect */}
+              <div className="text-center p-8 rounded-xl glass-card transition-all duration-500 relative overflow-hidden">
+                {/* Top neon line */}
+                <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent" />
+
                 <motion.div
-                  className="relative inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/20 mb-6 group-hover:bg-primary/30 transition-colors"
+                  className="inline-flex items-center justify-center w-16 h-16 rounded-xl bg-primary/10 mb-6 group-hover:bg-primary/20 transition-all"
                   whileHover={{ scale: 1.1 }}
-                  animate={{
-                    boxShadow: [
-                      "0 0 0 0 hsl(270 60% 50% / 0.4)",
-                      "0 0 0 15px hsl(270 60% 50% / 0)",
-                    ],
-                  }}
-                  transition={{
-                    boxShadow: {
-                      duration: 2,
-                      repeat: Infinity,
-                    },
-                  }}
                 >
                   <stat.icon className="w-8 h-8 text-primary" />
                 </motion.div>
 
-                {/* Animated number */}
-                <div className="relative text-4xl md:text-5xl font-bold text-white mb-2">
+                <div className="text-4xl md:text-5xl font-display font-bold text-foreground mb-2">
                   <AnimatedCounter value={stat.value} suffix={stat.suffix} isInView={isInView} />
                 </div>
 
-                <p className="relative text-white/70 font-medium">
-                  {stat.label}
-                </p>
+                <p className="text-muted-foreground font-medium text-sm">{stat.label}</p>
               </div>
             </motion.div>
           ))}
