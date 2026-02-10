@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import ThemeToggle from "@/components/ThemeToggle";
 import rissLogo from "@/assets/riss-logo.png";
 
 const navLinks = [
@@ -66,7 +65,7 @@ const Navigation = () => {
               transition={{ delay: 0.8 }}
               className="flex items-center gap-3"
             >
-              <ThemeToggle />
+              
               <Button
                 asChild
                 className="glow-button bg-primary hover:bg-primary/90 text-primary-foreground font-display font-bold tracking-wider text-xs"
@@ -112,7 +111,6 @@ const Navigation = () => {
                 </motion.a>
               ))}
               <div className="flex items-center gap-3 pt-2">
-                <ThemeToggle />
                 <Button
                   asChild
                   className="flex-1 glow-button bg-primary hover:bg-primary/90 font-display font-bold tracking-wider text-xs"
