@@ -41,7 +41,7 @@ const Navigation = () => {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            <img src={rissLogo} alt="RISS Technologies" className="h-12 w-auto rounded-xl" />
+            <img src={rissLogo} alt="RISS Technologies" className="h-12 w-12 rounded-full object-cover" />
           </motion.a>
 
           {/* Desktop Nav */}
