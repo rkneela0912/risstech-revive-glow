@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Send, Mail, MapPin, Phone, CheckCircle, MessageSquare } from "lucide-react";
+import emailjs from "@emailjs/browser";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -38,12 +39,26 @@ const Contact = () => {
 
   const onSubmit = async (data: ContactFormData) => {
     setIsSubmitting(true);
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    console.log("Form submitted:", data);
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    toast({ title: "Message sent!", description: "We'll get back to you as soon as possible." });
-    setTimeout(() => { form.reset(); setIsSubmitted(false); }, 3000);
+    try {
+      await emailjs.send(
+        "service_ewbu35p",
+        "template_79f7ry9",
+        {
+          from_name: data.name,
+          from_email: data.email,
+          message: data.message,
+        },
+        "TmgmKsQ4dqAEeJoim"
+      );
+      setIsSubmitted(true);
+      toast({ title: "Message sent!", description: "We'll get back to you as soon as possible." });
+      setTimeout(() => { form.reset(); setIsSubmitted(false); }, 3000);
+    } catch (error) {
+      console.error("EmailJS error:", error);
+      toast({ title: "Failed to send", description: "Please try again or email us directly.", variant: "destructive" });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
